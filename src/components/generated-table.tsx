@@ -6,11 +6,23 @@ const GeneratedTable = ({ data, setData }: any) => {
 
   const onSubmit = () => {
     let cloned = [...data]
-    for (const row of cloned) {
-      row.sort((a: number, b: number) => a - b)
+
+    // Flatten the 4x4 array into a 1D array
+    const flattenedArray = cloned.flat();
+
+    // Compare the numbers
+    const compareNumbers = (a: number, b: number) => a - b;
+
+    // Sort the flattened array
+    flattenedArray.sort(compareNumbers);
+
+    // Reshape the sorted 1D array back into a 4x4 array
+    const sortedArray = [] as any;
+    for (let i = 0; i < 4; i++) {
+      sortedArray.push(flattenedArray.slice(i * 4, (i + 1) * 4));
     }
-    cloned.sort((a, b) => a[0] - b[0])
-    setData(cloned)
+
+    setData(sortedArray)
   }
 
   return (

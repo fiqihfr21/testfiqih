@@ -12,7 +12,7 @@ const HomePage = () => {
     for (let i = 0; i < arr.length; i++) {
       const index = arr[i].indexOf(k)
       if (index > -1) {
-        return [i + 1, index + 1]
+        return [i, index]
       }
     }
     return false
@@ -28,15 +28,15 @@ const HomePage = () => {
             "https://matrixapi.frackment.id/api/matrix",
             {
               method: "POST",
-              body: {
-                m: data,
-                n: +target,
-                result: result ? result.join(", ") : false,
-              },
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${session?.user.token}`,
               },
+              body: JSON.stringify({
+                m: JSON.stringify(data),
+                n: JSON.stringify(+target),
+                result: result ? result.join(", ") : false,
+              }),
             }
           )
           callback(result)
