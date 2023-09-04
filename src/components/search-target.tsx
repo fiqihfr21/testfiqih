@@ -21,6 +21,7 @@ const SearchTarget = ({ onSearch }: any) => {
             value={targetNum}
             onChange={(e: any) => setTargetNum(e.target.value)}
             placeholder="Number"
+            data-testid="target_number"
           />
         </div>
         {location !== null && (
