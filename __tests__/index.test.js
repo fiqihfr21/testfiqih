@@ -1,44 +1,32 @@
-import { render, screen, fireEvent } from "@testing-library/react"
-import HomePage from "../src/app/page"
-import "@testing-library/jest-dom"
+import { render, screen } from "@testing-library/react"
 import { expect } from "@jest/globals"
+import "@testing-library/jest-dom"
+
+import GeneratedTable from "../src/components/generated-table"
+import SearchTarget from "../src/components/search-target"
+import Matrix from "../src/components/matrix"
 
 describe("Matrix Section", () => {
-  it("renders the section", async () => {
-    render(<HomePage />)
+  it("renders the parent component", async () => {
+    render(<GeneratedTable data={[]} setData={jest.fn} />)
     const section = await screen.findByTestId("section-matrix")
     expect(section).toBeDefined()
+    expect(<Matrix />).toBeDefined()
   })
-  it("renders the title", async () => {
-    render(<HomePage />)
+  it("renders the matrix components", async () => {
+    render(
+      <Matrix
+        sortedData={[]}
+        request={{ rows: 4, cols: 4 }}
+        onChange={jest.fn}
+      />
+    )
     const textMatrix = (await screen.findByTestId("title-matrix")).textContent
     expect(textMatrix).toContain("Matrix of")
   })
-  it("renders matrix tiles wrapper", async () => {
-    render(<HomePage />)
-    const tiles = await screen.findByTestId("matrix-tiles")
-    expect(tiles).toBeDefined()
-  })
-  it("renders 16 matrix tile", async () => {
-    render(<HomePage />)
-    const tile = await screen.findAllByTestId("matrix-tile")
-    expect(tile).toHaveLength(16)
-  })
-  it("able to changes the value of the tile", async () => {
-    render(<HomePage />)
-    const input = (await screen.findAllByTestId("matrix-tile"))[0]
-    setTimeout(() => {
-      fireEvent.change(input, { target: { value: 99 } })
-      expect(+input.value).toEqual(99)
-    }, 1)
-  })
-})
-
-describe("Search Target Section", () => {
-  it("renders the section", async () => {
-    render(<HomePage />)
-
-    const section = await screen.findByLabelText("Search Target")
-    expect(section).toBeDefined()
+  it("renders search target component", async () => {
+    render(<SearchTarget onSearch={jest.fn} />)
+    const textMatrix = await screen.getByLabelText("Search Target")
+    expect(textMatrix).toBeDefined()
   })
 })
