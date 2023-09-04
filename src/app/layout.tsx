@@ -25,12 +25,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <WagmiConfig config={wagmiConfig}>
         <SessionProvider>
-          <body>{children}</body>
+          <body><WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>
+        <Web3Modal projectId={projectId} ethereumClient={ethereumClient} /></body>
         </SessionProvider>
-      </WagmiConfig>
-      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
     </html>
   )
 }

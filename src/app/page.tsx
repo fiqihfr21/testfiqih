@@ -25,7 +25,7 @@ const HomePage = () => {
         onSearch={async (target: number, callback: any) => {
           const result = getIndexOfK(data, +target)
           const storeData = await fetch(
-            "https://matrixapi.frackment.id/api/matrix",
+            process.env.BASE_URL_API+"/api/matrix",
             {
               method: "POST",
               headers: {

@@ -61,6 +61,7 @@ function Matrix({ request, sortedData, onChange }: any) {
                     value={row[cellIndex]}
                     data-testid="matrix-tile"
                     onChange={(e) => onInputChange(e, rowIndex, cellIndex)}
+                    disabled={true}
                   />
                 </td>
               ))}

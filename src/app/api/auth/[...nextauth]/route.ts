@@ -16,7 +16,7 @@ export const authOptions: AuthOptions = {
       },
       authorize: async (credentials, req): Promise<AdapterUser | null> => {
         const validateUser = await fetch(
-          `https://matrixapi.frackment.id/api/auth/signin`,
+          process.env.BASE_URL_API+'/api/auth/signin',
           {
             method: "POST",
             body: JSON.stringify(credentials),
